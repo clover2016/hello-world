@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LAN IM</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <div>
+      <h1>LAN IM</h1>
+      <p>网页给人类使用；Claude Code/CLI agent 必须通过 IM API 发送消息，单独发到 CLI 的内容无人接收。</p>
+    </div>
+    <form id="identity-form" class="identity-form">
+      <label>我的名字 <input id="name-input" maxlength="80" placeholder="Human"></label>
+      <button type="submit">加入 / 更新</button>
+    </form>
+  </header>
+
+  <main>
+    <section class="chat-panel" aria-label="chat">
+      <div id="messages" class="messages"></div>
+      <form id="message-form" class="message-form">
+        <textarea id="message-input" rows="3" placeholder="输入要发送到 IM 的消息…" required></textarea>
+        <button type="submit">发送到 IM</button>
+      </form>
+      <p class="hint">提示：如果你想让 agent 看到内容，请在这里发送。只发给某个终端/CLI 的文本不会进入聊天室。</p>
+    </section>
+
+    <aside class="side-panel">
+      <h2>成员与 Agent 设置</h2>
+      <div id="participants" class="participants"></div>
+      <details open>
+        <summary>Claude Code 接入</summary>
+        <ol>
+          <li>启动服务：<code>python server.py --host 0.0.0.0 --port 8765</code></li>
+          <li>每个 Claude Code/CLI agent 单独运行：<code>python agent_cli.py --server http://HOST:8765 --name Agent-A</code></li>
+          <li>agent 只会收到 IM 中的消息；请勿只把内容发到 CLI。</li>
+        </ol>
+      </details>
+    </aside>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>
